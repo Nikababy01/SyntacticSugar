@@ -5,32 +5,47 @@ namespace SyntacticSugar
 {
     class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
-                    public class Bug
+            var predators = new List<string>();
+            predators.Add("AntEater");
+            predators.Add("Termites");
 
-            /*
-                You can declare a typed public property, make it read-only,
-                and initialize it with a default value all on the same
-                line of code in C#. Readonly properties can be set in the
-                class' constructors, but not by external code.
-            */
+            var prey = new List<string>();
+            prey.Add("Carrion");
+            prey.Add("Sugar");
 
-            public string Name { get; } = "";
+            //expression body function method
+            var bug = new Bug("Monique", "ant", predators, prey);
+            Console.WriteLine(bug.FormalName);
+
+            Console.WriteLine("Hello");
+        }
+    }
+
+    public class Bug
+    {
+        /*
+            You can declare a typed public property, make it read-only,
+            and initialize it with a default value all on the same
+            line of code in C#. Readonly properties can be set in the
+            class' constructors, but not by external code.
+        */
+        public string Name { get; } = "";
         public string Species { get; } = "";
         public List<string> Predators { get; } = new List<string>();
         public List<string> Prey { get; } = new List<string>();
 
         // Convert this readonly property to an expression member
-        public string FormalName
-        {
-            get
-            {
-                return $"{this.Name} the {this.Species}";
-            }
-        }
+        public string FormalName => $"{Name} the {Species}";
+        //{
+        //    get
+        //    {
+        //        return $"{Name} the {Species}";
+        //    }
+        //}
 
-        // Class constructor
+        //// Class constructor
         public Bug(string name, string species, List<string> predators, List<string> prey)
         {
             this.Name = name;
@@ -40,31 +55,29 @@ namespace SyntacticSugar
         }
 
         // Convert this method to an expression member
-        public string PreyList()
-        {
-            var commaDelimitedPrey = string.Join(",", this.Prey);
-            return commaDelimitedPrey;
-        }
+        public string PreyList() => string.Join(",", this.Prey);
+        //{
+        //    var commaDelimitedPrey = string.Join(",", this.Prey);
+        //    return commaDelimitedPrey;
+        //}
 
         // Convert this method to an expression member
-        public string PredatorList()
-        {
-            var commaDelimitedPredators = string.Join(",", this.Predators);
-            return commaDelimitedPredators;
-        }
+        //public string PredatorList()
+        //{
+        //    var commaDelimitedPredators = string.Join(",", this.Predators);
+        //    return commaDelimitedPredators;
+        //}
 
-        // Convert this to expression method
-        public string Eat(string food)
-        {
-            if (this.Prey.Contains(food))
-            {
-                return $"{this.Name} ate the {food}.";
-            }
-            else
-            {
-                return $"{this.Name} is still hungry.";
-            }
-        }
+        //// Convert this to expression method
+        //public string Eat(string food)
+        //{
+        //    if (this.Prey.Contains(food))
+        //    {
+        //        return $"{this.Name} ate the {food}.";
+        //    }
+        //    else
+        //    {
+        //        return $"{this.Name} is still hungry.";
+        //    }
     }
-}
-    
+    }
